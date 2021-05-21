@@ -6,17 +6,17 @@ A small `terraform` wrapper which automatically downloads and executes specific 
 
 Either download from the [project releases](https://github.com/jacobwgillespie/tf/releases), or install with Homebrew, choosing either the `tf` or `tf-shim` formulae:
 
-**tf** (installs as `tf`)
+- **tf** (installs as `tf`)
 
-```shell
-$ brew install jacobwgillespie/tap/tf
-```
+  ```shell
+  $ brew install jacobwgillespie/tap/tf
+  ```
 
-**tf-shim** (installs as `terraform`)
+- **tf-shim** (installs as `terraform`)
 
-```shell
-$ brew install jacobwgillespie/tap/tf-shim
-```
+  ```shell
+  $ brew install jacobwgillespie/tap/tf-shim
+  ```
 
 **NOTE:** it's recommended to install the `tf-shim` or otherwise alias `terraform` to `tf`, as that will enable automated tools like the Terraform VS Code extension to make use of the wrapper.
 
