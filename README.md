@@ -34,7 +34,7 @@ Next, run `tf` instead of `terraform`:
 $ tf [...]
 ```
 
-`tf` will automatically download and cache the specified Terraform version to `~/.tf`.
+`tf` will automatically download the specified Terraform version to `~/.tf` and execute it, passing all command line arguments to the Terraform binary.
 
 **NOTE:** `tf` itself is silent, it will only print output from the proxied `terraform` binary unless there is an error. The first time you run `tf`, it will take time for it to download the Terraform CLI binary to `~/.tf`.
 
@@ -47,8 +47,8 @@ $ tf [...]
 `tf` is a simple wrapper around Terraform that executes the version of the Terraform CLI specified in the nearest `.terraform-version` file. Specifically, it:
 
 1. Looks for the nearest `.terraform-version` file, starting in the current working directory and scanning up the file tree.
-2. Downloads the specified version to `~/.tf/terraform-VERSION` if not already downloaded using [tfinstall](github.com/hashicorp/terraform-exec)
-3. Execs that binary with all passed environment and CLI arguments.
+2. Downloads the specified version to `~/.tf/terraform-VERSION`, if not already downloaded, using [tfinstall](https://github.com/hashicorp/terraform-exec)
+3. Executes that binary with all passed environment and CLI arguments.
 
 ## License
 
