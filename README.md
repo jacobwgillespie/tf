@@ -1,6 +1,9 @@
-# tf
+# ⚡ tf
 
-A small `terraform` wrapper which automatically downloads and executes specific Terraform versions.
+A small, fast `terraform` wrapper which automatically downloads and executes specific Terraform versions. 
+
+* Small — create a `.terraform-version` file with your desired version, run `tf`
+* Fast — adds only a few milliseconds of delay compared to running `terraform` directly
 
 ## Installation
 
