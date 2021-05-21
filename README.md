@@ -30,6 +30,14 @@ $ tf [...]
 
 `tf` will print an error if it is unable to find a `.terraform-version` file. To set the default Terraform version, create a `.terraform-version` file in your home directory, then all directories underneath will default to your specified version.
 
+### How It Works
+
+`tf` is a simple wrapper around Terraform that executes the version of the Terraform CLI specified in the nearest `.terraform-version` file. Specifically, it:
+
+1. Looks for the nearest `.terraform-version` file, starting in the current working directory and scanning up the file tree.
+2. Downloads the specified version to `~/.tf/terraform-VERSION` if not already downloaded using [tfinstall](github.com/hashicorp/terraform-exec)
+3. Execs that binary with all passed environment and CLI arguments.
+
 ## License
 
 MIT License, see `LICENSE`
