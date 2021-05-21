@@ -25,3 +25,15 @@ changelog:
     exclude:
       - "^docs:"
       - "^test:"
+brews:
+  - tap:
+      owner: jacobwgillespie
+      name: tf
+    commit_author:
+      name: Jacob Gillespie
+      email: jacobwgillespie@gmail.com
+    homepage: https://github.com/jacobwgillespie/tf
+    description: Terraform version wrapper
+    license: MIT
+gomod:
+  proxy: true
