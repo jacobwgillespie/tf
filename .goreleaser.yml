@@ -26,7 +26,8 @@ changelog:
       - "^docs:"
       - "^test:"
 brews:
-  - tap:
+  - &formula
+    tap:
       owner: jacobwgillespie
       name: homebrew-tap
       token: "{{ .Env.HOMEBREW_TAP_GITHUB_TOKEN }}"
@@ -36,5 +37,12 @@ brews:
     homepage: https://github.com/jacobwgillespie/tf
     description: Terraform version wrapper
     license: MIT
+  - <<: *formula
+    name: tf-shim
+    conflicts:
+      - terraform
+      - tfenv
+    install: |
+      bin.install "tf" => "terraform"
 gomod:
   proxy: true
