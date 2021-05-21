@@ -36,6 +36,8 @@ $ tf [...]
 
 `tf` will automatically download and cache the specified Terraform version to `~/.tf`.
 
+**NOTE:** `tf` itself is silent, it will only print output from the proxied `terraform` binary unless there is an error. The first time you run `tf`, it will take time for it to download the Terraform CLI binary to `~/.tf`.
+
 ### Default Terraform Version
 
 `tf` will print an error if it is unable to find a `.terraform-version` file. To set the default Terraform version, create a `.terraform-version` file in your home directory, then all directories underneath will default to your specified version.
