@@ -28,7 +28,7 @@ changelog:
 brews:
   - tap:
       owner: jacobwgillespie
-      name: tf
+      name: homebrew-tap
       token: "{{ .Env.HOMEBREW_TAP_GITHUB_TOKEN }}"
     commit_author:
       name: Jacob Gillespie
