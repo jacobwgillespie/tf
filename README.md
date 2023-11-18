@@ -1,9 +1,9 @@
 # ⚡ tf
 
-A small, fast `terraform` wrapper which automatically downloads and executes specific Terraform versions. 
+A small, fast `terraform` wrapper which automatically downloads and executes specific Terraform versions.
 
-* Small — create a `.terraform-version` file with your desired version, run `tf`
-* Fast — adds only a few milliseconds of delay compared to running `terraform` directly
+- Small — create a `.terraform-version` file with your desired version, run `tf`
+- Fast — adds only a few milliseconds of delay compared to running `terraform` directly
 
 ## Installation
 
@@ -50,7 +50,7 @@ $ tf [...]
 `tf` is a simple wrapper around Terraform that executes the version of the Terraform CLI specified in the nearest `.terraform-version` file. Specifically, it:
 
 1. Looks for the nearest `.terraform-version` file, starting in the current working directory and scanning up the file tree.
-2. Downloads the specified version to `~/.tf/terraform-VERSION`, if not already downloaded, using [tfinstall](https://github.com/hashicorp/terraform-exec)
+2. Downloads the specified version to `~/.tf/terraform-VERSION`, if not already downloaded, using [hc-install](https://github.com/hashicorp/hc-install)
 3. Executes that binary with all passed environment and CLI arguments.
 
 ## License

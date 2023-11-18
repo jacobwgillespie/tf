@@ -4,37 +4,45 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	"io/ioutil"
 	"os"
 	"path/filepath"
 	"strings"
 
-	"github.com/hashicorp/terraform-exec/tfinstall"
+	"github.com/hashicorp/go-version"
+	install "github.com/hashicorp/hc-install"
+	"github.com/hashicorp/hc-install/product"
+	"github.com/hashicorp/hc-install/releases"
+	"github.com/hashicorp/hc-install/src"
 )
 
 const versionFileName = ".terraform-version"
 
-func binFromVersion(version string) (string, error) {
+func binFromVersion(versionString string) (string, error) {
+	ctx := context.Background()
+
 	homedir, err := os.UserHomeDir()
 	if err != nil {
 		return "", err
 	}
 
-	execPath := filepath.Join(homedir, ".tf", fmt.Sprintf("terraform-%s", version))
+	execPath := filepath.Join(homedir, ".tf", fmt.Sprintf("terraform-%s", versionString))
 
 	_, err = os.Stat(execPath)
 	if errors.Is(err, os.ErrNotExist) {
-		if err = os.Mkdir(filepath.Join(homedir, ".tf"), 0755); err != nil && !errors.Is(err, os.ErrExist) {
-			return "", err
-		}
-
-		tmpDir, err := ioutil.TempDir("", "tfinstall")
+		err := os.MkdirAll(filepath.Join(homedir, ".tf"), 0755)
 		if err != nil {
 			return "", err
 		}
-		defer os.RemoveAll(tmpDir)
 
-		downloadPath, err := tfinstall.Find(context.Background(), tfinstall.ExactVersion(version, tmpDir))
+		i := install.NewInstaller()
+		defer i.Remove(ctx)
+
+		downloadPath, err := i.Install(ctx, []src.Installable{
+			&releases.ExactVersion{
+				Product: product.Terraform,
+				Version: version.Must(version.NewVersion(versionString)),
+			},
+		})
 		if err != nil {
 			return "", err
 		}
@@ -55,14 +63,14 @@ func versionFromFile() (string, error) {
 	}
 
 	for {
-		files, err := ioutil.ReadDir(dir)
+		files, err := os.ReadDir(dir)
 		if err != nil {
 			return "", err
 		}
 
 		for _, f := range files {
 			if f.Name() == versionFileName {
-				data, err := ioutil.ReadFile(filepath.Join(dir, versionFileName))
+				data, err := os.ReadFile(filepath.Join(dir, versionFileName))
 				if err != nil {
 					return "", err
 				}
