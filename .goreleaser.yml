@@ -1,6 +1,7 @@
 before:
   hooks:
     - go mod tidy
+
 builds:
   - env:
       - CGO_ENABLED=0
@@ -8,26 +9,17 @@ builds:
       - linux
       - windows
       - darwin
-archives:
-  - replacements:
-      darwin: Darwin
-      linux: Linux
-      windows: Windows
-      386: i386
-      amd64: x86_64
-checksum:
-  name_template: "checksums.txt"
-snapshot:
-  name_template: "{{ .Tag }}-next"
+
 changelog:
   sort: asc
   filters:
     exclude:
       - "^docs:"
       - "^test:"
+
 brews:
   - &formula
-    tap:
+    repository:
       owner: jacobwgillespie
       name: homebrew-tap
       token: "{{ .Env.HOMEBREW_TAP_GITHUB_TOKEN }}"
@@ -44,5 +36,3 @@ brews:
       - tfenv
     install: |
       bin.install "tf" => "terraform"
-gomod:
-  proxy: true
